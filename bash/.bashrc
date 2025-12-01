@@ -44,3 +44,6 @@ export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 # --- Mise Version Manager (PHP, Node, Java, etc.) ---
 # This replaces the manual shim exports and handles shell integration correctly
 eval "$(mise activate bash)"
+
+# --- Starship Prompt ---
+eval "$(starship init bash)"
