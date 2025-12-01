@@ -1,0 +1,29 @@
+# Background and foreground
+background = #1C1C1E
+foreground = #FFFFFF
+# Cursor
+cursor-color = #FFFFFF
+cursor-text = #1C1C1E
+# Selection
+selection-background = #808080
+selection-foreground = #FFFFFF
+# ANSI colors (normal: 0-7, bright: 8-15)
+palette = 0=#1C1C1E
+palette = 1=#4A4A4A
+palette = 2=#5A5A5A
+palette = 3=#6A6A6A
+palette = 4=#7A7A7A
+palette = 5=#8A8A8A
+palette = 6=#9A9A9A
+palette = 7=#FFFFFF
+palette = 8=#2C2C2E
+palette = 9=#555555
+palette = 10=#666666
+palette = 11=#777777
+palette = 12=#888888
+palette = 13=#999999
+palette = 14=#AAAAAA
+palette = 15=#F2F2F2
+# Indexed colors
+palette = 16=#BBBBBB
+palette = 17=#DDDDDD
