@@ -14,6 +14,9 @@ alias nt='NVIM_APPNAME=nvim-test nvim'
 alias nb='NVIM_APPNAME=nvim-brian nvim'
 alias nt2='NVIM_APPNAME=nvim-test-2 nvim'
 
+# startup the ssh agent
+eval $(keychain --eval --quiet id_ed25519)
+
 # Environment Loading
 . "$HOME/.local/share/../bin/env"
 
