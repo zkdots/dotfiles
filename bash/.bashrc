@@ -50,4 +50,4 @@ eval "$(mise activate bash)"
 
 # --- Starship Prompt ---
 eval "$(starship init bash)"
-alias win="virsh --connect qemu:///system start win11-dev; remmina"
+alias win='~/scripts/start-win.sh'
