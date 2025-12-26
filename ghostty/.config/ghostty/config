@@ -1,7 +1,8 @@
 custom-shader = shaders/cursor_blaze.glsl
 custom-shader-animation = always
 
-background = #1c1c1c
+# background = #1c1c1c
+background = #000000
 foreground = #c0c0c0
 selection-background = #313131
 selection-foreground = #e1e1e1
