@@ -7,24 +7,104 @@ return {
     "nvim-neotest/nvim-nio",
     "mason-org/mason.nvim",
   },
+  -- Keymaps are now defined here for better lazy-loading and documentation
+  keys = {
+    {
+      "<F5>",
+      function()
+        require("dap").continue()
+      end,
+      desc = "Debug: Continue",
+    },
+    {
+      "<F10>",
+      function()
+        require("dap").step_over()
+      end,
+      desc = "Debug: Step Over",
+    },
+    {
+      "<F11>",
+      function()
+        require("dap").step_into()
+      end,
+      desc = "Debug: Step Into",
+    },
+    {
+      "<F12>",
+      function()
+        require("dap").step_out()
+      end,
+      desc = "Debug: Step Out",
+    },
+
+    -- Breakpoints
+    {
+      "<leader>db",
+      function()
+        require("dap").toggle_breakpoint()
+      end,
+      desc = "Debug: Toggle Breakpoint",
+    },
+    {
+      "<leader>dB",
+      function()
+        require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+      end,
+      desc = "Debug: Breakpoint Condition",
+    },
+    {
+      "<leader>lp",
+      function()
+        require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+      end,
+      desc = "Debug: Log Point",
+    },
+
+    -- Utilities
+    {
+      "<leader>dr",
+      function()
+        require("dap").repl.open()
+      end,
+      desc = "Debug: Open REPL",
+    },
+    {
+      "<leader>dl",
+      function()
+        require("dap").run_last()
+      end,
+      desc = "Debug: Run Last",
+    },
+    {
+      "<leader>du",
+      function()
+        require("dapui").toggle()
+      end,
+      desc = "Debug: Toggle UI",
+    },
+    {
+      "<leader>dt",
+      function()
+        require("dap").terminate()
+      end,
+      desc = "Debug: Terminate",
+    },
+  },
   config = function()
     local dap = require("dap")
     local dapui = require("dapui")
     local dap_virtual_text = require("nvim-dap-virtual-text")
-
     -- Setup DAP UI
     dapui.setup()
-
     -- Setup virtual text
     dap_virtual_text.setup()
-
     -- DAP signs
     vim.fn.sign_define("DapBreakpoint", { text = "🔴", texthl = "", linehl = "", numhl = "" })
     vim.fn.sign_define("DapBreakpointCondition", { text = "🔵", texthl = "", linehl = "", numhl = "" })
     vim.fn.sign_define("DapLogPoint", { text = "🟡", texthl = "", linehl = "", numhl = "" })
     vim.fn.sign_define("DapStopped", { text = "🟢", texthl = "", linehl = "", numhl = "" })
     vim.fn.sign_define("DapBreakpointRejected", { text = "❌", texthl = "", linehl = "", numhl = "" })
-
     -- Java DAP configuration (jdtls provides this automatically with debug bundles)
     dap.configurations.java = {
       {
@@ -42,10 +122,8 @@ return {
         end,
       },
     }
-
     -- Python DAP configuration
     require("dap-python").setup("python")
-
     -- TypeScript/JavaScript DAP configuration
     dap.adapters["pwa-node"] = {
       type = "server",
@@ -59,7 +137,6 @@ return {
         },
       },
     }
-
     dap.configurations.javascript = {
       {
         type = "pwa-node",
@@ -76,7 +153,6 @@ return {
         cwd = "${workspaceFolder}",
       },
     }
-
     dap.configurations.typescript = {
       {
         type = "pwa-node",
@@ -94,38 +170,10 @@ return {
         cwd = "${workspaceFolder}",
       },
     }
-
     dap.configurations.typescriptreact = dap.configurations.typescript
-
-    -- -- DAP UI auto open/close
-    -- dap.listeners.after.event_initialized["dapui_config"] = function()
-    -- 	dapui.open()
-    -- end
-    -- dap.listeners.before.event_terminated["dapui_config"] = function()
-    -- 	dapui.close()
-    -- end
-    -- dap.listeners.before.event_exited["dapui_config"] = function()
-    -- 	dapui.close()
-    -- end
-
-    -- Keymaps
-    local opts = { noremap = true, silent = true }
-    local keymap = vim.keymap.set
-
-    keymap("n", "<F5>", "<Cmd>lua require'dap'.continue()<CR>", opts)
-    keymap("n", "<F10>", "<Cmd>lua require'dap'.step_over()<CR>", opts)
-    keymap("n", "<F11>", "<Cmd>lua require'dap'.step_into()<CR>", opts)
-    keymap("n", "<F12>", "<Cmd>lua require'dap'.step_out()<CR>", opts)
-    keymap("n", "<Leader>b", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", opts)
-    keymap("n", "<Leader>B", "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", opts)
-    keymap(
-      "n",
-      "<Leader>lp",
-      "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
-      opts
-    )
-    keymap("n", "<Leader>dr", "<Cmd>lua require'dap'.repl.open()<CR>", opts)
-    keymap("n", "<Leader>dl", "<Cmd>lua require'dap'.run_last()<CR>", opts)
-    keymap("n", "<Leader>du", "<Cmd>lua require'dapui'.toggle()<CR>", opts)
+    -- Optional: Uncomment to automatically open/close UI when debugging starts/stops
+    -- dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
+    -- dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
+    -- dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
   end,
 }
