@@ -48,6 +48,12 @@ export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 # This replaces the manual shim exports and handles shell integration correctly
 eval "$(mise activate bash)"
 
+# Tmux auto-start
+if [[ -z "$TMUX" ]] && [ "$TERM" != "linux" ]; then
+    tmux attach-session -t dev || tmux new-session -s dev
+    exit
+fi
+
 # --- Starship Prompt ---
 eval "$(starship init bash)"
 alias win='~/scripts/start-win.sh'
