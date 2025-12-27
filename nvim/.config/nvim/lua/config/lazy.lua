@@ -20,6 +20,8 @@ require("lazy").setup({
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import the java extra
     { import = "lazyvim.plugins.extras.lang.java" },
+    -- import rust extra
+    { import = "lazyvim.plugins.extras.lang.rust" },
     -- import/override with your plugins
     { import = "plugins" },
   },
