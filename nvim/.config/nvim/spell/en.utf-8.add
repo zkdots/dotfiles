@@ -31,3 +31,7 @@ SSLServerSocketFactory
 SSLServerSocket
 SSLSocket
 setSoTimeout
+localhost
+Ctrl
+ChatServer
+ChatClient
