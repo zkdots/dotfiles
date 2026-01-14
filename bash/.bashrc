@@ -49,7 +49,9 @@ export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 eval "$(mise activate bash)"
 
 # Tmux auto-start
-if [[ -z "$TMUX" ]] && [ "$TERM" != "linux" ]; then
+# We added [[ -t 0 ]] to check if we are in a real terminal window.
+# This prevents it from running inside Zed's background processes.
+if [[ -t 0 ]] && [[ -z "$TMUX" ]] && [ "$TERM" != "linux" ]; then
     tmux attach-session -t dev || tmux new-session -s dev
     exit
 fi

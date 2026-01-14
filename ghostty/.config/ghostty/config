@@ -39,3 +39,9 @@ palette = 14=#d7d7d7
 #: white
 palette = 7=#f1f1f1
 palette = 15=#ffffff
+
+# Slowdown mouse scrolling
+mouse-scroll-multiplier = 0.95
+
+# Avoid ghostty opening a mirror 
+gtk-single-instance = false
